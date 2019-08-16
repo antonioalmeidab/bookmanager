@@ -36,8 +36,8 @@ module.exports = {
     const user = await User.findByIdAndUpdate(
       { _id: user_id },
       { $push: { books: {
-        book_id: book_id,
-        startDate: startDate
+        $each: [ {book_id: book_id, startDate: startDate} ],
+        $position: 0
         }
       }},
       { new: true }
