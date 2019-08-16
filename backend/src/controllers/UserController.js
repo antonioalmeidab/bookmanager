@@ -45,4 +45,8 @@ module.exports = {
 
     return res.json(user);
   },
+
+  async updateBooks(req, res) {
+    
+  }
 }
