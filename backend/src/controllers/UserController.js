@@ -36,14 +36,23 @@ module.exports = {
     const user = await User.findByIdAndUpdate(
       { _id: user_id },
       { $push: { books: {
-        $each: [ {book_id: book_id, startDate: startDate} ],
-        $position: 0
+          $each: [ {book_id: book_id, startDate: startDate} ],
+          $position: 0
         }
       }},
       { new: true }
     );
 
     return res.json(user);
+  },
+
+  async getUsersReading(req, res) {
+    const bookId = req.params.bookId;
+    console.log(bookId);
+
+    const usersReading = await User.find({ books: { $elemMatch: { book_id: bookId}} });
+
+    console.log(usersReading);
   },
 
   async updateBooks(req, res) {

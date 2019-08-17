@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser')
 
 const app = express();
 
@@ -12,6 +13,8 @@ mongoose.connect('mongodb+srv://root:lsTJhhlDyLf8SzWu@cluster0-ywk53.mongodb.net
 
 app.use(cors());
 
+app.use(bodyParser.json());
 app.use(require('./routes'));
+
 
 app.listen(8000, console.log('Listening on port 8000...'));
