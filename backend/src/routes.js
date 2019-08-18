@@ -12,8 +12,10 @@ const upload = multer(uploadConfig);
 
 routes.get('/users', UserController.listUsers);
 routes.post('/users', upload.single('avatar'), UserController.createUser);
+routes.get('/users/:userId', UserController.getSpecificUser);
 
-routes.post('/users/books', upload.none(), UserController.addBook);
+routes.post('/users/:userId/books/:bookId', UserController.addBook);
+routes.put('/users/:userId/books', bodyParser.json(), UserController.updateBooks);
 
 routes.get('/reviews', ReviewController.listReviews);
 routes.post('/reviews', upload.none(), ReviewController.postReview);

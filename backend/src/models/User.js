@@ -12,9 +12,9 @@ const userSchema = new mongoose.Schema({
       book_id: String,
       progress: { type: Number, default: 0 },
       rating: Number,
-      startDate: { type: Date, required: true },
+      startDate: { type: Date, default: null },
       finishDate: { type: Date, default: null}
-   }
+    }
   ]
 },);
 

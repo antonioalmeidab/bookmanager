@@ -25,7 +25,7 @@ module.exports = {
     let userBooksInfo = await Promise.all(books.map(async book => {
       try { 
         let response = await booksAPI.get(`volumes/${book.book_id}?key=${APIkey}`);
-        return response.data.volumeInfo;
+        return response.data;
       } catch(err) {
         console.log(err);
       }

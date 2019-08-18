@@ -9,6 +9,19 @@ module.exports = {
     return res.json(users);
   },
 
+  async getSpecificUser(req, res) {
+    const userId = req.params.userId;
+
+    const user = await User.findById(userId);
+
+    return res.json({
+      name: user.name,
+      avatar: user.avatar,
+      books: user.books,
+      totalBooks: user.books.length,
+    });
+  },
+
   async createUser(req, res) {
     const { username, name } = req.body;
     const { filename: avatar } = req.file;
@@ -31,15 +44,12 @@ module.exports = {
   },
 
   async addBook(req, res) {
-    const { user_id, book_id, startDate } = req.body;
+    const book_id = req.params.bookId;
+    const userId = req.params.userId;
 
     const user = await User.findByIdAndUpdate(
-      { _id: user_id },
-      { $push: { books: {
-          $each: [ {book_id: book_id, startDate: startDate} ],
-          $position: 0
-        }
-      }},
+      { _id: userId },
+      { $push: { books: {book_id: book_id}, $position: 0}},
       { new: true }
     );
 
@@ -47,15 +57,23 @@ module.exports = {
   },
 
   async getUsersReading(req, res) {
-    const bookId = req.params.bookId;
-    console.log(bookId);
+    const book_id = req.params.bookId;
 
-    const usersReading = await User.find({ books: { $elemMatch: { book_id: bookId}} });
+    const usersReading = await User.find({ books: { $elemMatch: { book_id: book_id}} });
 
-    console.log(usersReading);
+    return res.json(usersReading);
   },
 
   async updateBooks(req, res) {
-    
+    const userBooks = req.body;
+    const userId = req.params.userId;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: userId },
+      { $set: { books: userBooks } },
+      { new: true }
+    );
+
+    return res.json(updatedUser);
   }
 }
