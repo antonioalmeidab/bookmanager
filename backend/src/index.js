@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 
 const app = express();
 
-mongoose.connect('mongodb+srv://<username>:<password>@cluster0-ywk53.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://root:lsTJhhlDyLf8SzWu@cluster0-ywk53.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true
