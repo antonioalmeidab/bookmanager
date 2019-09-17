@@ -1,5 +1,5 @@
 # bookmanager
-Book managing web application made using Vue.js, Node.js and MongoDB.
+Book managing web application made using Vue.js, Node.js, MongoDB and Google Books API.
 
 # Install
 Run `$ npm install` or `$ yarn install` insife frontend and backend folders
